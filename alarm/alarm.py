@@ -1,13 +1,18 @@
 import RPi.GPIO as GPIO 
 from time import sleep 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD) 
-GPIO.setup(26, GPIO.OUT, initial=GPIO.LOW) # LED
-GPIO.setup(28, GPIO.OUT, initial=GPIO.LOW) # buzzer
 
-while True:
-    GPIO.output(28, GPIO.HIGH) # Turn on LED 
-    GPIO.output(26, GPIO.HIGH) # Turn on buzzer
-    sleep(1) 
-    GPIO.output(28, GPIO.LOW) # Turn off LED
-    sleep(1) 
+def alarm():
+    GPIO.setmode(GPIO.BCM) 
+    GPIO.setup(12, GPIO.OUT, initial=GPIO.LOW) # LED
+    GPIO.setup( 5, GPIO.OUT, initial=GPIO.LOW) # buzzer
+    
+    for i in range(3):
+        GPIO.output(12, GPIO.HIGH) # Turn on LED 
+        GPIO.output( 5, GPIO.HIGH) # Turn on buzzer
+        sleep(0.5) 
+        GPIO.output( 5, GPIO.LOW) # Turn off buzzer
+        sleep(0.5) 
+    GPIO.cleanup()
+
+if __name__ == "__main__":
+    alarm()
