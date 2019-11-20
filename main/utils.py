@@ -61,6 +61,7 @@ def correct_auth():
     '''
 
     '''
+    global wcounter
     #reset timeout if exist
     #reset "wrong code" counter
     #run process open
@@ -70,6 +71,7 @@ def incorrect_auth():
     '''
 
     '''
+    global wcounter
     #run thread alarm
     #run thread timeout
     #if "wrong code" == 3
