@@ -22,7 +22,7 @@ def check_id():
     '''
     pass
 
-def check_temp():
+def check_temperature():
     '''
     Checks if temperature is outside set range
 
