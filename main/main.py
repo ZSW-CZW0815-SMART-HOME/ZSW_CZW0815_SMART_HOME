@@ -1,15 +1,3 @@
-#load conf
-#create queue
-#start threads
-#while True
-#   switch(q.get)
-#   case 'key'
-#       check_code
-#   case 'rfid'
-#       check_rfid
-#   case 'temp'
-#       check_temp
-
 import time, signal, sys
 from threading import Event, Thread
 from queue import Queue
@@ -19,23 +7,9 @@ import utils
 
 def sigend():
     q.join()
+    lcd_q.join()
     gpio.cleanup()
     sys.exit(0)
-
-def correct():
-    #reset timeout if exist
-    #reset "wrong code" counter
-    #lcd("open")
-    #run process open
-    pass
-
-def wrong():
-    #run thread alarm
-    #run thread timeout
-    #if "wrong code" == 3
-    #   run process/thread camera
-    #lcd("wrong)"
-    pass
 
 if __name__ == '__main__':
     #init
@@ -45,7 +19,10 @@ if __name__ == '__main__':
     #   key
     #   rfid
     q = Queue()
+    lcd_q = Queue()
     code = ""
+    wcounter = 0
+
     while True:
         msg = q.get()
         if msg['src'] == 'keyboard':
@@ -54,10 +31,12 @@ if __name__ == '__main__':
                 code = ""
             elif key == 'a':
                 if check_code(code):
-                    correct()
+                    correct_auth()
+                    #lcd("open")
                 else:
-                    #increment "wrong code" counter
-                    wrong()
+                    wcounter += 1
+                    incorrect_auth()
+                    #lcd("wrong code")
                 pass
             else: #if numeric
                 if len(code) > 8:
@@ -68,9 +47,11 @@ if __name__ == '__main__':
             pass
         elif msg['src'] == 'rfid':
             if check_id(msg['val']):
-                correct()
+                correct_auth()
+                #lcd("open")
             else:
-                wrong()
+                incorrect_auth()
+                #lcd("wrong code")
         elif msg['src'] == 'temperature':
             op = check_temperature(msg['val'])
             if op == 1:
