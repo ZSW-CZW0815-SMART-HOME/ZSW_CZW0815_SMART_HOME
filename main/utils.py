@@ -36,9 +36,22 @@ def check_temp():
 
 def move_blinds():
     '''
-    move blinds up/down
+    Move blinds up/down
 
     Args:
         dir(int): up/down
     '''
     pass
+
+def load_configuration():
+    '''
+    Load configuration from file (temperature range, 
+    code, card id list, temperature sensors names, 
+    mail)
+
+    Args:
+        name(string): file name
+
+    Returns:
+        conf(dic): configuration info
+    '''
