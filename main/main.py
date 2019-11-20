@@ -16,3 +16,15 @@
 #       check_rfid
 #   case 'temp'
 #       check_temp
+
+import time, signal, sys
+from threading import Event, Thread
+from queue import Queue
+import RPi.GPIO as GPIO
+
+def load_conf():
+    pass
+
+if __name__ == '__main__':
+    q = Queue()
+    q.join()
