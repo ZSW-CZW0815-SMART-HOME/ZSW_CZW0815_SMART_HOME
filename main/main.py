@@ -22,6 +22,21 @@ def sigend():
     gpio.cleanup()
     sys.exit(0)
 
+def correct():
+    #reset timeout if exist
+    #reset "wrong code" counter
+    #lcd("open")
+    #run process open
+    pass
+
+def wrong():
+    #run thread alarm
+    #run thread timeout
+    #if "wrong code" == 3
+    #   run process/thread camera
+    #lcd("wrong)"
+    pass
+
 if __name__ == '__main__':
     #init
     #thread:
@@ -29,18 +44,45 @@ if __name__ == '__main__':
     #   lcd
     #   key
     #   rfid
-    sys.exit(0)
     q = Queue()
-
+    code = ""
     while True:
         msg = q.get()
         if msg['src'] == 'keyboard':
-            #check
+            key = msg['val']
+            if key == 'c':
+                code = ""
+            elif key == 'a':
+                if check_code(code):
+                    correct()
+                else:
+                    #increment "wrong code" counter
+                    wrong()
+                pass
+            else: #if numeric
+                if len(code) > 8:
+                    code = ""
+                else:
+                    #lcd('*')
+                    code += key
             pass
         elif msg['src'] == 'rfid':
-            #check
-            pass
+            if check_id(msg['val']):
+                correct()
+            else:
+                wrong()
         elif msg['src'] == 'temperature':
-            #check
-            pass
+            op = check_temperature(msg['val'])
+            if op == 1:
+                #heat  off
+                #acond on
+                pass
+            elif op == -1
+                #heat  on
+                #acond off
+                pass
+            else:
+                #heat  off
+                #acond off
+                pass
         q.task_done()

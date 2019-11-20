@@ -57,4 +57,22 @@ def load_configuration(name):
     '''
     pass
 
+def correct_auth():
+    '''
+
+    '''
+    #reset timeout if exist
+    #reset "wrong code" counter
+    #run process open
+    pass
+
+def incorrect_auth():
+    '''
+
+    '''
+    #run thread alarm
+    #run thread timeout
+    #if "wrong code" == 3
+    #   run process/thread camera
+    pass
 
