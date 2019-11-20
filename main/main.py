@@ -1,10 +1,3 @@
-#def
-#   -check_code
-#   -check_id
-#   -check_temp
-#   -blinds
-#   -lights
-
 #load conf
 #create queue
 #start threads
@@ -22,9 +15,32 @@ from threading import Event, Thread
 from queue import Queue
 import RPi.GPIO as GPIO
 
-def load_conf():
-    pass
+import utils
+
+def sigend():
+    q.join()
+    gpio.cleanup()
+    sys.exit(0)
 
 if __name__ == '__main__':
+    #init
+    #thread:
+    #   temp
+    #   lcd
+    #   key
+    #   rfid
+    sys.exit(0)
     q = Queue()
-    q.join()
+
+    while True:
+        msg = q.get()
+        if msg['src'] == 'keyboard':
+            #check
+            pass
+        elif msg['src'] == 'rfid':
+            #check
+            pass
+        elif msg['src'] == 'temperature':
+            #check
+            pass
+        q.task_done()

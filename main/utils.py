@@ -1,4 +1,4 @@
-def check_code():
+def check_code(code):
     '''
     Check combination
 
@@ -10,7 +10,7 @@ def check_code():
     '''
     pass
 
-def check_id():
+def check_id(id):
     '''
     Look for id in list of authorized card id's
 
@@ -22,7 +22,7 @@ def check_id():
     '''
     pass
 
-def check_temperature():
+def check_temperature(temp):
     '''
     Checks if temperature is outside set range
 
@@ -34,16 +34,16 @@ def check_temperature():
     '''
     pass
 
-def move_blinds():
+def move_blinds(move):
     '''
     Move blinds up/down
 
     Args:
-        dir(int): up/down
+        move(int): up/down
     '''
     pass
 
-def load_configuration():
+def load_configuration(name):
     '''
     Load configuration from file (temperature range, 
     code, card id list, temperature sensors names, 
@@ -55,3 +55,6 @@ def load_configuration():
     Returns:
         conf(dic): configuration info
     '''
+    pass
+
+
