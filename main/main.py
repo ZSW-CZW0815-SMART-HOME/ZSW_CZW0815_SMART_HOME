@@ -55,7 +55,6 @@ if __name__ == '__main__':
         elif msg['src'] == 'temperature':
             op = check_temperature(msg['val'])
             if op == 1:
-
                 GPIO.output(6, GPIO.LOW)#heat  off
                 GPIO.output(13, GPIO.HIGH)#acond on
                 pass

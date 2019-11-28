@@ -37,14 +37,11 @@ def check_temperature(temp):
     high_temp=30.0
     low_temp=10.0
     if temperature > high_temp: #too hot
-        print("too hot")
-        tempResult
+        tempResult=1
     elif temperature < low_temp : #too cold
-        print("too cold")
-        tempResult
+        tempResult=-1
     else: #perfect
-        print("perfect")
-        tempResult
+        tempResult=0
     return tempResult
 
 def move_blinds(move):
