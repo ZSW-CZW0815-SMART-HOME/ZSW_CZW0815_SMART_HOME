@@ -1,4 +1,4 @@
-import time
+import time, sys, signal
 from threading import Thread
 from queue import Queue
 import I2C_LCD_driver as i2c_lcd
@@ -10,6 +10,11 @@ def set_lcd(q):
         q.task_done()
 
 if __name__ == "__main__":
+    def sig_end(sig, frame):
+        q.join()
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, sig_end)
     q = Queue()
     thr = Thread(target=set_lcd, args=(q,))
     thr.setDaemon(True)

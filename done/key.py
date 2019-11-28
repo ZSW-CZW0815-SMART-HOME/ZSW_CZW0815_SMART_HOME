@@ -1,7 +1,5 @@
-import time
+import time, sys, signal
 from threading import Event, Thread
-import signal
-import sys
 from queue import Queue
 import RPi.GPIO as GPIO
 
