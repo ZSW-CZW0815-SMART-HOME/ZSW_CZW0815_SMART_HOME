@@ -35,8 +35,18 @@ def check_temperature(temp):
 
     Returns:
         diff(int): too hot(1) | perfect(0) | too cold(-1)
+
     '''
-    pass
+    temperature = temp
+    high_temp=30.0
+    low_temp=10.0
+    if temperature > high_temp: #too hot
+        tempResult=1
+    elif temperature < low_temp : #too cold
+        tempResult=-1
+    else: #perfect
+        tempResult=0
+    return tempResult
 
 def move_blinds(move):
     '''

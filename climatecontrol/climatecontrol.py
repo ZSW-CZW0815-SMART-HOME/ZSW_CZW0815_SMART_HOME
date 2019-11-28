@@ -2,6 +2,7 @@ import os, glob, time
 import RPi.GPIO as GPIO
 
 def read_temp_raw():
+    device_file = device_folder + '/w1_slave'
     f = open(device_file, 'r')
     lines = f.readlines()
     f.close()
@@ -19,19 +20,14 @@ def read_temp():
 
 def control_climate():
 
-#    os.system('modprobe w1-gpio')
-#   os.system('modprobe w1-therm')
-
     base_dir = '/sys/bus/w1/devices/'
     device_folder = glob.glob(base_dir + '28*')[0]
-    device_file = device_folder + '/w1_slave'
-
+   
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(6, GPIO.OUT, initial=GPIO.LOW) # lamp
     GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW) # fan
     high_temp=30.0
     low_temp=10.0
-
 
     GPIO.cleanup()
     temperature = read_temp()

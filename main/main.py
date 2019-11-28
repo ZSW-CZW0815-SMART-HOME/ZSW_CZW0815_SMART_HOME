@@ -55,15 +55,15 @@ if __name__ == '__main__':
         elif msg['src'] == 'temperature':
             op = check_temperature(msg['val'])
             if op == 1:
-                #heat  off
-                #acond on
+                GPIO.output(6, GPIO.LOW)#heat  off
+                GPIO.output(13, GPIO.HIGH)#acond on
                 pass
             elif op == -1
-                #heat  on
-                #acond off
+                GPIO.output(6, GPIO.HIGH)#heat  on
+                GPIO.output(13, GPIO.LOW)#acond off
                 pass
             else:
-                #heat  off
-                #acond off
+                GPIO.output(6, GPIO.LOW)#heat  off
+                GPIO.output(13, GPIO.LOW)#acond off
                 pass
         q.task_done()
