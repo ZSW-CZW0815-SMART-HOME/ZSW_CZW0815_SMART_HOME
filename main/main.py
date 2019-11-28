@@ -20,7 +20,7 @@ if __name__ == '__main__':
     #   rfid
     q = Queue()
     lcd_q = Queue()
-    code = ""
+    code = "" # input
     wcounter = 0
 
     while True:

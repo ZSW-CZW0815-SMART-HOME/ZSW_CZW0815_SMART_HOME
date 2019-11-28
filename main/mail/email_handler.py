@@ -75,7 +75,7 @@ class Class_eMail():
         Mail_Body.attach(Mail_Msg)
         #TODO
         part = MIMEBase('application', "octet-stream")
-        part.set_payload(open("powerpuff.jpg", "rb").read())
+        part.set_payload(open("mail/powerpuff.jpg", "rb").read())
         Encoders.encode_base64(part)
         part.add_header('Content-Disposition', 'attachment; filename="powerpuff.jpg"')
         Mail_Body.attach(part)
