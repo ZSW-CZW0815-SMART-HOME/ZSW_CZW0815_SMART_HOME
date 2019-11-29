@@ -3,15 +3,12 @@ import json
 import sys
 import common
 
-#data = {} # data from json file
 
 def check_code(code):
-    # print(common.data['code'])
-    # print(common.data['mail'])
     if code == common.data['code']:
         print('OK')
     else:
-        os.system('python mail/demo.py')
+        os.system('python mail/demo.py') # new process
         print('Mail sent')
 
 def check_id(id):
@@ -63,13 +60,11 @@ def move_blinds(move):
     '''
     pass
 
+# load to data dictionary in common.py file
 def load_configuration(): # ok
-    #global data
     with open('data.json') as json_file:
-        common.data = json.load(json_file)
-    # print(common.data['code'])
-    # print(common.data['mail'])
-
+        common.data = json.load(json_file) 
+    
 def correct_auth():
     '''
 
@@ -90,9 +85,3 @@ def incorrect_auth():
     #if "wrong code" == 3
     #   run process/thread camera
     pass
-
-
-if __name__ == '__main__':
-    load_configuration()
-    input = sys.argv[1]
-    check_code(input)
