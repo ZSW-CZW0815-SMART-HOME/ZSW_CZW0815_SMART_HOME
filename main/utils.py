@@ -84,9 +84,3 @@ def incorrect_auth():
     #if "wrong code" == 3
     #   run process/thread camera
     pass
-
-
-if __name__ == '__main__':
-    load_configuration()
-    input = sys.argv[1]
-    check_code(input)
