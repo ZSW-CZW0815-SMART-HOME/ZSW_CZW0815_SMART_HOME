@@ -1,13 +1,12 @@
 import cv2
 
 # przykładowe dane kamery
-scheme = '192.168.1'
+host = '192.168.0.20'
 stream = '1'
 username = 'admin'
-password = 'admin'
+password = 'admin1'
 
-host = scheme+'101'
-camera = cv2.VideoCapture('rtsp://'+username+':'+password+'@'+host+':554/')
+camera = cv2.VideoCapture('rtsp://'+username+':'+password+'@'+host+':80/')
 while True:
     return_value,image = camera.read()
     gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -19,3 +18,5 @@ camera.release()
 cv2.destroyAllWindows()
 
 # https://www.epiphan.com/userguides/pearl/Content/UserGuides/Streaming/capture/sourceIPCameras.htm
+
+#https://stackoverflow.com/questions/49978705/access-ip-camera-in-python-opencv
