@@ -22,5 +22,5 @@ if __name__ == "__main__":
     thr.setDaemon(True)
     thr.start()
     while True:
-        print(q.get()['val'])
+        print(type(q.get()['val']), q.get()['val'])
         q.task_done()

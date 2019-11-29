@@ -1,28 +1,41 @@
-def check_code(code):
-    '''
-    Check combination
+import os
+import json
+import sys, time
+#import common
 
-    Parameters:
-        code(string): code 
+conf = {'code': "1234", 'cards': [72046226359, 405839336734]} 
 
-    Returns:
-        correct(bool): match
-    '''
-    return True
+code = ""
+wcounter = 0
 
-def check_id(card_id):
-    '''
-    Look for id in list of authorized card id's
+def check_code(q_lcd):
+    global code
+    global conf
+    global wcounter
+    q_lcd.put(' '*len(code))
+    if code == conf['code']:
+        correct_auth(q_lcd)
+        q_lcd.put("open")
+    else:
+        incorrect_auth(q_lcd)
+        wcounter += 1
+        q_lcd.put("wrong code")
+    code = ""
+    time.sleep(1)
+    q_lcd.put("          ")
 
-    Args:
-        id(int): card id
+def check_id(cid, q_lcd):
+    global conf
+    if cid in conf['cards']:
+        correct_auth(q_lcd)
+        q_lcd.put("open")
+#   else:
+        #stop timeout
+    code = ""
+    time.sleep(1)
+    q_lcd.put("    ")
 
-    Returns:
-        correct(bool): match
-    '''
-    return True
-
-def check_temperature(temp):
+def check_temperature(temperature):
     '''
     Checks if temperature is outside set range
 
@@ -33,25 +46,13 @@ def check_temperature(temp):
         diff(int): too hot(1) | perfect(0) | too cold(-1)
 
     '''
-    temperature = temp
-    high_temp=30.0
-    low_temp=10.0
-    if temperature > high_temp: #too hot
-        tempResult=1
-    elif temperature < low_temp : #too cold
-        tempResult=-1
+    global conf
+    if temperature > conf['temp_max']: #too hot
+        return 1
+    elif temperature < conf['temp_min'] : #too cold
+        return -1
     else: #perfect
-        tempResult=0
-    return tempResult
-
-def move_blinds(move):
-    '''
-    Move blinds up/down
-
-    Args:
-        move(int): up/down
-    '''
-    pass
+        return 0
 
 def load_configuration(name):
     '''
@@ -65,26 +66,24 @@ def load_configuration(name):
     Returns:
         conf(dic): configuration info
     '''
+    #global data
+#   with open(name) as json_file:
+#       common.data = json.load(json_file)
+    # print(common.data['code'])
+    # print(common.data['mail'])
     pass
 
 def correct_auth(lcd_q):
-    '''
-
-    '''
     global wcounter
+    wcounter = 0
+    os.spawnl(os.P_NOWAIT, './open_door.py', 'open_door.py')
     #reset timeout if exist
-    #reset "wrong code" counter
-    #run process open
-    pass
 
 def incorrect_auth(lcd_q):
-    '''
-
-    '''
     global wcounter
-    #run thread alarm
-    #run thread timeout
-    #if "wrong code" == 3
-    #   run process/thread camera
-    pass
+    os.spawnl(os.P_NOWAIT, './alarm.py', 'alarm.py')
+    if wcounter >= 3:
+        wcounter = 0
+        os.system('./python mail/demo.py')
+    #   run thread timeout
 
