@@ -1,5 +1,5 @@
 {
-    "temperature_range" : [],
+    "temperature_range" : [10,30],
     "code" : "6125",
     "card_id_list" : [],
     "temperature_sensor_names" : [],

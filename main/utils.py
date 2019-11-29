@@ -2,16 +2,14 @@ import os
 import json
 import sys
 import common
-
-#data = {} # data from json file
+from threading import Event, Thread
+import alarm
 
 def check_code(code):
-    # print(common.data['code'])
-    # print(common.data['mail'])
     if code == common.data['code']:
         print('OK')
     else:
-        os.system('python mail/demo.py')
+        os.system('python mail/demo.py') # new process
         print('Mail sent')
 
 def check_id(id):
@@ -37,9 +35,15 @@ def check_temperature(temp):
         diff(int): too hot(1) | perfect(0) | too cold(-1)
 
     '''
+
     temperature = temp
+    '''
     high_temp=30.0
     low_temp=10.0
+    '''
+    temperature_range=common.data['temperature_range=']
+    low_temp=temperature_range[0]
+    high_temp=[1]
     if temperature > high_temp: #too hot
         tempResult=1
     elif temperature < low_temp : #too cold
@@ -57,20 +61,20 @@ def move_blinds(move):
     '''
     pass
 
+# load to data dictionary in common.py file
 def load_configuration(): # ok
-    #global data
     with open('data.json') as json_file:
-        common.data = json.load(json_file)
-    # print(common.data['code'])
-    # print(common.data['mail'])
-
+        common.data = json.load(json_file) 
+    
 def correct_auth():
     '''
 
     '''
     global wcounter
+
+
     #reset timeout if exist
-    #reset "wrong code" counter
+    wcounter = 0   #reset "wrong code" counter
     #run process open
     pass
 
@@ -80,7 +84,13 @@ def incorrect_auth():
     '''
     global wcounter
     #run thread alarm
+    
+    thread = Thread(target=alarm.alarm)
+    thread.setDaemon(True)
+    thread.start()
+    
     #run thread timeout
     #if "wrong code" == 3
-    #   run process/thread camera
+    if wcounter >= 3
+            #   run process/thread camera
     pass
