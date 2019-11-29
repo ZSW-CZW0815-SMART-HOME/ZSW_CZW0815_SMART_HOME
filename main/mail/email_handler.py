@@ -15,6 +15,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.MIMEBase import MIMEBase
 from email import Encoders
+from camera import takePhoto
 
 
 #Form the absolute path for the settings.ini file
@@ -75,7 +76,9 @@ class Class_eMail():
         Mail_Body.attach(Mail_Msg)
         #TODO
         part = MIMEBase('application', "octet-stream")
-        part.set_payload(open("mail/powerpuff.jpg", "rb").read())
+        # take photo and attach
+        takePhoto()
+        part.set_payload(open("../camera/photo.jpg", "rb").read()) # check the path !!!!!!!!
         Encoders.encode_base64(part)
         part.add_header('Content-Disposition', 'attachment; filename="powerpuff.jpg"')
         Mail_Body.attach(part)
