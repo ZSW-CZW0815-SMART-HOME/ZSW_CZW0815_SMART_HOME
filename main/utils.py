@@ -37,9 +37,15 @@ def check_temperature(temp):
         diff(int): too hot(1) | perfect(0) | too cold(-1)
 
     '''
+
     temperature = temp
+    '''
     high_temp=30.0
     low_temp=10.0
+    '''
+    temperature_range=common.data['temperature_range=']
+    low_temp=temperature_range[0]
+    high_temp=[1]
     if temperature > high_temp: #too hot
         tempResult=1
     elif temperature < low_temp : #too cold
