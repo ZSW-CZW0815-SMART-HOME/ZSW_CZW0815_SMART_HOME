@@ -85,12 +85,10 @@ def incorrect_auth():
     global wcounter
     #run thread alarm
     
-    
-    thread = Thread(target=alarm)
+    thread = Thread(target=alarm.alarm)
     thread.setDaemon(True)
     thread.start()
     
-
     #run thread timeout
     #if "wrong code" == 3
     if wcounter >= 3
