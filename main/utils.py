@@ -2,7 +2,8 @@ import os
 import json
 import sys
 import common
-
+from threading import Event, Thread
+import alarm
 
 def check_code(code):
     if code == common.data['code']:
@@ -70,8 +71,10 @@ def correct_auth():
 
     '''
     global wcounter
+
+
     #reset timeout if exist
-    #reset "wrong code" counter
+    wcounter = 0   #reset "wrong code" counter
     #run process open
     pass
 
@@ -81,7 +84,15 @@ def incorrect_auth():
     '''
     global wcounter
     #run thread alarm
+    
+    
+    thread = Thread(target=alarm)
+    thread.setDaemon(True)
+    thread.start()
+    
+
     #run thread timeout
     #if "wrong code" == 3
-    #   run process/thread camera
+    if wcounter >= 3
+            #   run process/thread camera
     pass
