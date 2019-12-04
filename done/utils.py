@@ -3,7 +3,9 @@ import json
 import sys, time
 #import common
 
-conf = {'code': "1234", 'cards': [72046226359, 405839336734]} 
+lpath = 'home/pi/Desktop/zsw/git/done/'
+
+conf = {'code': "1234", 'cards': [72046226359, 405839336734], 'temp_max': 35, 'temp_min': 10} 
 
 code = ""
 wcounter = 0
@@ -76,14 +78,14 @@ def load_configuration(name):
 def correct_auth(lcd_q):
     global wcounter
     wcounter = 0
-    os.spawnl(os.P_NOWAIT, './open_door.py', 'open_door.py')
+    os.spawnl(os.P_NOWAIT, '/usr/bin/python3.7', 'python3.7', 'open_door.py')
     #reset timeout if exist
 
 def incorrect_auth(lcd_q):
     global wcounter
-    os.spawnl(os.P_NOWAIT, './alarm.py', 'alarm.py')
+    os.spawnl(os.P_NOWAIT, '/usr/bin/python3.7', 'python3.7', 'alarm.py')
     if wcounter >= 3:
         wcounter = 0
-        os.system('./python mail/demo.py')
+#       os.system('./python mail/demo.py')
     #   run thread timeout
 

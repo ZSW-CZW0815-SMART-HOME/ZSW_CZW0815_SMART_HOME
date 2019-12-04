@@ -5,6 +5,9 @@ import RPi.GPIO as GPIO
 import lcd, key, rfid
 import utils as u
 
+PIN_HEATER = 6
+PIN_ACOND = 13
+
 def start_thread(fun, q):
     thr = Thread(target=fun, args=(q,))
     thr.setDaemon(True)
@@ -22,6 +25,8 @@ threads = []
 if __name__ == '__main__':
     GPIO.setmode(GPIO.BCM)
     signal.signal(signal.SIGINT, sigend)
+    GPIO.setup(PIN_HEATER, GPIO.OUT, initial=GPIO.LOW) 
+    GPIO.setup(PIN_ACOND,  GPIO.OUT, initial=GPIO.HIGH)
     #init
     #thread:
     #   temp
@@ -42,6 +47,12 @@ if __name__ == '__main__':
                 u.code = ""
             elif key == 'a':
                 u.check_code(q_lcd)
+            elif key == "f1":
+                q.put({'src': 'temp', 'val': 50})
+            elif key == "f2":
+                q.put({'src': 'temp', 'val': -50})
+            elif key == "f3":
+                q.put({'src': 'temp', 'val': 20})
             else: #if numeric
                 if len(u.code) > 8:
                     q_lcd.put(' '*len(u.code))
@@ -53,19 +64,19 @@ if __name__ == '__main__':
         elif msg['src'] == 'rfid':
             u.check_id(msg['val'], q_lcd)
 
-        elif msg['src'] == 'temperature':
+        elif msg['src'] == 'temp':
             op = u.check_temperature(msg['val'])
             if op == 1:
-                GPIO.output(6, GPIO.LOW)#heat  off
-                GPIO.output(13, GPIO.HIGH)#acond on
+                GPIO.output(PIN_HEATER, GPIO.LOW)#heat  off
+                GPIO.output(PIN_ACOND, GPIO.LOW)#acond on
                 pass
             elif op == -1:
-                GPIO.output(6, GPIO.HIGH)#heat  on
-                GPIO.output(13, GPIO.LOW)#acond off
+                GPIO.output(PIN_HEATER, GPIO.HIGH)#heat  on
+                GPIO.output(PIN_ACOND, GPIO.HIGH)#acond off
                 pass
             else:
-                GPIO.output(6, GPIO.LOW)#heat  off
-                GPIO.output(13, GPIO.LOW)#acond off
+                GPIO.output(PIN_HEATER, GPIO.LOW)#heat  off
+                GPIO.output(PIN_ACOND, GPIO.HIGH)#acond off
                 pass
 
         q.task_done()

@@ -1,4 +1,4 @@
-import sys, signal
+import time, sys, signal
 from threading import Thread
 from queue import Queue
 import RPi.GPIO as GPIO
@@ -9,6 +9,7 @@ def rfid(q):
     while True:
         card_id = reader.read_id()
         q.put({'src': 'rfid', 'val': card_id})
+        time.sleep(0.1)
 
 if __name__ == "__main__":
     def sig_end(sig, frame):

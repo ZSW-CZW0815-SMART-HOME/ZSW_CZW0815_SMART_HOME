@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 from time import sleep 
 
 PIN_LED_OPEN = 1
-PIN_LOCK = 5#14
+PIN_LOCK = 14
 
 def open_door():
     GPIO.setmode(GPIO.BCM) 
@@ -17,5 +17,4 @@ def open_door():
         GPIO.output(PIN_LED_OPEN, GPIO.LOW) # Turn off LED
     GPIO.cleanup()
 
-if __name__ == "__main__":
-    open_door()
+open_door()

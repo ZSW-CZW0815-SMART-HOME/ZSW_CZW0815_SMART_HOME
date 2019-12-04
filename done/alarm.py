@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO 
 from time import sleep 
 
-PIN_LED_ALARM = 1#temp
+PIN_LED_ALARM = 26
 PIN_BUZZER = 5
 
 def alarm():
@@ -13,10 +13,9 @@ def alarm():
         GPIO.output(PIN_LED_ALARM, GPIO.HIGH) # Turn on LED 
         GPIO.output(PIN_BUZZER,    GPIO.HIGH) # Turn on buzzer
         sleep(0.5) 
+        GPIO.output(PIN_LED_ALARM, GPIO.LOW) # Turn off buzzer
         GPIO.output(PIN_BUZZER, GPIO.LOW) # Turn off buzzer
         sleep(0.5) 
-        GPIO.output(PIN_LED_ALARM, GPIO.LOW) # Turn off LED
     GPIO.cleanup()
 
-if __name__ == "__main__":
-    alarm()
+alarm()
