@@ -69,7 +69,7 @@ class Class_eMail():
         takePhoto()
         part.set_payload(open("../camera/photo.jpg", "rb").read()) # check the path !!!!!!!!
         Encoders.encode_base64(part)
-        part.add_header('Content-Disposition', 'attachment; filename="powerpuff.jpg"')
+        part.add_header('Content-Disposition', 'attachment; filename="photo.jpg"')
         Mail_Body.attach(part)
         #Send Mail
         self.session.sendmail(FROM_ADD, [To_Add], Mail_Body.as_string())
