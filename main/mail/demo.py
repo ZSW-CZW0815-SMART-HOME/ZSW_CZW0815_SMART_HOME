@@ -1,13 +1,3 @@
-##------------------------------------------
-##--- Author: Pradeep Singh
-##--- Blog: https://iotbytes.wordpress.com/programmatically-send-e-mail-from-raspberry-pi-using-python-and-gmail/
-##--- Date: 21st Feb 2017
-##--- Version: 1.0
-##--- Python Ver: 2.7
-##------------------------------------------
-
-
-
 #import the class definition from "email_handler.py" file
 from email_handler import Class_eMail
 #import common
