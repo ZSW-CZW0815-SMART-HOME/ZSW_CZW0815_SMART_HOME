@@ -1,11 +1,15 @@
 import os
 import json
 import sys, time
-#import common
+from threading import Thread
+import RPi.GPIO as GPIO
+import blinds
 
 lpath = 'home/pi/Desktop/zsw/git/done/'
 
-conf = {'code': "1234", 'cards': [72046226359, 405839336734], 'temp_max': 35, 'temp_min': 10, 'email': 'zsw.projekt.test@gmail.com'} 
+conf = {'code': "1234", 'cards': [72046226359, 405839336734], 'temp_max': 27, 'temp_min': 10, 'email': 'zsw.projekt.test@gmail.com'} 
+
+PIN_LIGHTS = 19
 
 code = ""
 wcounter = 0
@@ -79,14 +83,18 @@ def correct_auth(lcd_q):
     global wcounter
     wcounter = 0
     os.spawnl(os.P_NOWAIT, '/usr/bin/python3.7', 'python3.7', 'open_door.py')
-    #reset timeout if exist
+    GPIO.output(PIN_LIGHTS, GPIO.HIGH)
+    thr = Thread(target=blinds.blinds, args=("up",))
+    thr.setDaemon(True)
+    thr.start()
 
 def incorrect_auth(lcd_q):
     global wcounter
     os.spawnl(os.P_NOWAIT, '/usr/bin/python3.7', 'python3.7', 'alarm.py')
     if wcounter >= 3:
         wcounter = 0
-        os.spawnl(os.P_NOWAIT, '/usr/bin/python2.7', 'python2.7', 'mail/demo.py')
+        #os.spawnl(os.P_NOWAIT, '/usr/bin/python2.7', 'python2.7', 'mail/demo.py')
+        print('send mail')
 #       os.system('./python mail/demo.py')
     #   run thread timeout
 

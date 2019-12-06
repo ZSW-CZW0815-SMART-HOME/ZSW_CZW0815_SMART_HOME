@@ -16,9 +16,9 @@ def blinds(mov):
         GPIO.output(PIN_BLINDS_DOWN, GPIO.LOW)
         sleep(1)
         GPIO.output(PIN_BLINDS_DOWN, GPIO.HIGH)
-    GPIO.cleanup()
 
 if __name__ == "__main__":
     blinds("up")
     sleep(1)
     blinds("down")
+    GPIO.cleanup()

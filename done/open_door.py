@@ -15,6 +15,8 @@ def open_door():
         sleep(1) 
         GPIO.output(PIN_LOCK, GPIO.LOW) # Turn off lock
         GPIO.output(PIN_LED_OPEN, GPIO.LOW) # Turn off LED
-    GPIO.cleanup()
 
 open_door()
+if __name__ == "__main__":
+    GPIO.cleanup()
+

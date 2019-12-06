@@ -16,6 +16,8 @@ def alarm():
         GPIO.output(PIN_LED_ALARM, GPIO.LOW) # Turn off buzzer
         GPIO.output(PIN_BUZZER, GPIO.LOW) # Turn off buzzer
         sleep(0.1) 
-    GPIO.cleanup()
 
 alarm()
+if __name__ == "__main__":
+    GPIO.cleanup()
+    
