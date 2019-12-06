@@ -5,7 +5,7 @@ import sys, time
 
 lpath = 'home/pi/Desktop/zsw/git/done/'
 
-conf = {'code': "1234", 'cards': [72046226359, 405839336734], 'temp_max': 35, 'temp_min': 10} 
+conf = {'code': "1234", 'cards': [72046226359, 405839336734], 'temp_max': 35, 'temp_min': 10, 'email': 'zsw.projekt.test@gmail.com'} 
 
 code = ""
 wcounter = 0
@@ -86,6 +86,7 @@ def incorrect_auth(lcd_q):
     os.spawnl(os.P_NOWAIT, '/usr/bin/python3.7', 'python3.7', 'alarm.py')
     if wcounter >= 3:
         wcounter = 0
+        os.spawnl(os.P_NOWAIT, '/usr/bin/python2.7', 'python2.7', 'mail/demo.py')
 #       os.system('./python mail/demo.py')
     #   run thread timeout
 

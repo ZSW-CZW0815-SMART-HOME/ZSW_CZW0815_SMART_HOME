@@ -12,10 +12,10 @@ def alarm():
     for i in range(3):
         GPIO.output(PIN_LED_ALARM, GPIO.HIGH) # Turn on LED 
         GPIO.output(PIN_BUZZER,    GPIO.HIGH) # Turn on buzzer
-        sleep(0.5) 
+        sleep(0.1) 
         GPIO.output(PIN_LED_ALARM, GPIO.LOW) # Turn off buzzer
         GPIO.output(PIN_BUZZER, GPIO.LOW) # Turn off buzzer
-        sleep(0.5) 
+        sleep(0.1) 
     GPIO.cleanup()
 
 alarm()
